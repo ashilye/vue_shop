@@ -2,14 +2,60 @@
   <div class="login_container">
     <div class="login_box">
       <div class="avatar_box">
+        <!-- 头像区域 -->
         <img src="../assets/github_my.png" alt="logo">
       </div>
+
+      <!-- 提交表单区域 -->
+      <el-form label-width="0px" class="login_form" :model="loginForm" :rules="loginFormRules" ref="loginFormRef">
+        <!-- 用户名 -->
+        <el-form-item prop="username">
+          <el-input v-model="loginForm.username" placeholder="请输入账号" prefix-icon="el-icon-user"></el-input>
+        </el-form-item>
+        <!-- 密码 -->
+        <el-form-item prop="password">
+          <el-input v-model="loginForm.password" type="password" placeholder="请输入密码" prefix-icon="el-icon-lock"></el-input>
+        </el-form-item>
+        <!-- 按钮 -->
+        <el-form-item class="btns">
+          <el-button type="primary">登录</el-button>
+          <el-button type="info" @click="resetLoginForm">重置</el-button>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      loginForm: {
+        username: '',
+        password: '',
+      },
+      //表单验证规则
+      loginFormRules: {
+        username: [
+          { required: true, message: '请输入账号', trigger: 'blur' },
+          { min: 3, max: 32, message: '长度在 3 到 32 个字符', trigger: 'blur' },
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur' },
+        ],
+      },
+    }
+  },
+
+  methods: {
+    //点击重置按钮
+    resetLoginForm() {
+      // console.log('log-->', this)
+      this.$refs.loginFormRef.resetFields()
+    },
+  },
+}
 </script>
 
 <style lang="less" scoped>
@@ -47,5 +93,18 @@ export default {}
       background-color: #eee;
     }
   }
+}
+
+.login_form {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.btns {
+  display: flex; //弹性盒子
+  justify-content: center; //对其
 }
 </style>
