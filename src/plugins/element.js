@@ -1,7 +1,9 @@
 import Vue from 'vue'
-import { Button, Form, FormItem, Input } from 'element-ui'
+import { Button, Form, FormItem, Input, Message } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
+//Message 比较特殊,需要全局挂载 $message 中的 message 是自定义名字,可以随便命名,使用时要按照这个名字使用,一般使用 message 来命名
+Vue.prototype.$message = Message

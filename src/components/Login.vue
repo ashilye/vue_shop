@@ -18,7 +18,7 @@
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">
-          <el-button type="primary">登录</el-button>
+          <el-button type="primary" @click="login">登录</el-button>
           <el-button type="info" @click="resetLoginForm">重置</el-button>
         </el-form-item>
       </el-form>
@@ -31,8 +31,8 @@ export default {
   data() {
     return {
       loginForm: {
-        username: '',
-        password: '',
+        username: 'admin',
+        password: '123456',
       },
       //表单验证规则
       loginFormRules: {
@@ -53,6 +53,30 @@ export default {
     resetLoginForm() {
       // console.log('log-->', this)
       this.$refs.loginFormRef.resetFields()
+    },
+
+    login() {
+      this.$refs.loginFormRef.validate(async (val) => {
+        // console.log('检验', val)
+        if (!val) {
+          this.$message.error('错了哦，请重新输入!')
+          return
+        }
+        // console.log('检验通过', val)
+        //返回的是Promise, 定律：如果某个方法返回值是Promise,那么可以使用await 来简化Promise操作,而 await只能用在async 修改的方法中
+        //解构 data 重命名为 res
+        const { data: res } = await this.$http.post('login', this.loginForm)
+        console.log('登录结果->', res)
+        if (res.meta.status !== 200) {
+          this.$message.error('登陆失败:' + res.meta.msg)
+          return
+        }
+        // console.log('登录成功')
+        //1,登录成功,需要将token保存在 sessionStorage 中,sessionStorage是网页中会话期间生效,保存这里比较合适
+        window.sessionStorage.setItem('token', res.data.token)
+        //2,页面跳转
+        this.$router.push('/home')
+      })
     },
   },
 }
