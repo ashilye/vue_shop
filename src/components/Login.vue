@@ -1,13 +1,13 @@
 <template>
-  <div class="login_container">
-    <div class="login_box">
-      <div class="avatar_box">
+  <div class="login-container">
+    <div class="login-box">
+      <div class="avatar-box">
         <!-- 头像区域 -->
         <img src="../assets/github_my.png" alt="logo">
       </div>
 
       <!-- 提交表单区域 -->
-      <el-form label-width="0px" class="login_form" :model="loginForm" :rules="loginFormRules" ref="loginFormRef">
+      <el-form label-width="0px" class="login-form" :model="loginForm" :rules="loginFormRules" ref="loginFormRef">
         <!-- 用户名 -->
         <el-form-item prop="username">
           <el-input v-model="loginForm.username" placeholder="请输入账号" prefix-icon="el-icon-user"></el-input>
@@ -93,11 +93,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.login_container {
+.login-container {
   background-color: #2b4b6b;
   height: 100%;
 }
-.login_box {
+.login-box {
   width: 450px;
   height: 300px;
   background-color: #fff;
@@ -108,7 +108,7 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
 
-  .avatar_box {
+  .avatar-box {
     width: 130px;
     height: 130px;
     border: 1px solid #eee; //边框
@@ -132,7 +132,7 @@ export default {
   }
 }
 
-.login_form {
+.login-form {
   position: absolute;
   bottom: 0;
   width: 100%;
