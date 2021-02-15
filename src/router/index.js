@@ -16,4 +16,21 @@ const router = new VueRouter({
   routes
 })
 
+//路由导航守卫
+router.beforeEach((to, from, next) => {
+  //to 将要访问的路径
+  //from 从那个路径跳转而来
+  //next 是一个函数,
+  //   1, next() 放行  
+  //   2, next('/xxx') 强制跳转到xxx页面
+
+  //如果访问的是login页,直接放行
+  if (to.path === '/login') return next();
+  // 否则判断 sessionStorage 中是否有token,如果有 放行,如果没有 跳转到login页
+  const tokenStr = window.sessionStorage.getItem('token')
+  if (!tokenStr) {
+    return next('/login')
+  }
+  next()
+})
 export default router

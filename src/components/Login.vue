@@ -38,11 +38,21 @@ export default {
       loginFormRules: {
         username: [
           { required: true, message: '请输入账号', trigger: 'blur' },
-          { min: 3, max: 32, message: '长度在 3 到 32 个字符', trigger: 'blur' },
+          {
+            min: 3,
+            max: 32,
+            message: '长度在 3 到 32 个字符',
+            trigger: 'blur',
+          },
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur' },
+          {
+            min: 6,
+            max: 16,
+            message: '长度在 6 到 16 个字符',
+            trigger: 'blur',
+          },
         ],
       },
     }
@@ -107,7 +117,10 @@ export default {
     box-shadow: 0 0 10px #ddd; // 阴影
     position: absolute; //定位
     left: 50%;
-    transform: translate(-50%, -50%); //向自身左方向移动自身的50%,向上自身高度50%
+    transform: translate(
+      -50%,
+      -50%
+    ); //向自身左方向移动自身的50%,向上自身高度50%
     background-color: #fff;
 
     img {
