@@ -17,7 +17,7 @@
           <i :class="isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'"></i>
         </div>
         <!-- 侧边栏菜单 -->
-        <el-menu background-color="#333744" text-color="#fff" active-text-color="#409eff" unique-opened :collapse="isCollapse" :collapse-transition="false">
+        <el-menu background-color="#333744" text-color="#fff" active-text-color="#409eff" unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath">
           <!-- 一级菜单 -->
           <!-- index  前面加： 说明是动态数据, index 的值必须是字符串类型 所以拼一个'' -->
           <el-submenu :index="item.id + ''" v-for="item in menuList" :key="item.id">
@@ -26,7 +26,7 @@
               <span>{{item.authName}}</span>
             </template>
             <!-- 二级菜单 -->
-            <el-menu-item :index="subItem.id + ''" v-for="subItem in item.children" :key="subItem.id">
+            <el-menu-item :index=" '/'+subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="saveNavState('/'+subItem.path)">
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>{{subItem.authName}}</span>
@@ -36,7 +36,9 @@
         </el-menu>
       </el-aside>
       <!-- 右侧内容区域 -->
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -56,11 +58,15 @@ export default {
         145: 'iconfont icon-baobiao',
       },
       isCollapse: false,
+
+      //被激活的二级菜单path
+      activePath: '',
     }
   },
   // 生命周期函数
   created() {
     this.getMenuList()
+    this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
     logout() {
@@ -81,6 +87,12 @@ export default {
         return this.$message.error('获取菜单失败：' + res.meta.msg)
       }
       this.menuList = res.data
+    },
+
+    // 保存二级菜单path 的激活状态
+    saveNavState(path) {
+      window.sessionStorage.setItem('activePath', path)
+      this.activePath = path
     },
   },
 }
