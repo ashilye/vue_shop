@@ -45,6 +45,7 @@
 
 <script>
 export default {
+  name: 'home',
   data() {
     return {
       menuList: [],
