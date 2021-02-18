@@ -28,7 +28,10 @@ import {
   Select,
   Option,
   Radio,
-  Cascader
+  Cascader,
+  Alert,
+  Tabs,
+  TabPane
 
 } from 'element-ui'
 
@@ -60,6 +63,9 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(Radio)
 Vue.use(Cascader)
+Vue.use(Alert)
+Vue.use(Tabs)
+Vue.use(TabPane)
 
 //Message 比较特殊,需要全局挂载 $message 中的 message 是自定义名字,可以随便命名,使用时要按照这个名字使用,一般使用 message 来命名
 Vue.prototype.$message = Message
