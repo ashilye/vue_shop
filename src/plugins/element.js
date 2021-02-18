@@ -26,7 +26,10 @@ import {
   Tag,
   Tree,
   Select,
-  Option
+  Option,
+  Radio,
+  Cascader
+
 } from 'element-ui'
 
 Vue.use(Button)
@@ -55,6 +58,8 @@ Vue.use(Tag)
 Vue.use(Tree)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Radio)
+Vue.use(Cascader)
 
 //Message 比较特殊,需要全局挂载 $message 中的 message 是自定义名字,可以随便命名,使用时要按照这个名字使用,一般使用 message 来命名
 Vue.prototype.$message = Message

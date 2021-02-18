@@ -280,7 +280,7 @@ export default {
       // console.log('item3', rightId)
       // 提示确认删除
       const confirmResult = await this.$confirm(
-        '此操作将永久删除该文件, 是否继续?',
+        '此操作将永久删除该角色, 是否继续?',
         '提示',
         {
           confirmButtonText: '确定',
@@ -301,6 +301,7 @@ export default {
         this.$message.error('删除失败：' + res.meta.msg)
         return
       }
+      this.$message.success(res.meta.msg)
       //刷新列表
       // this.getRolesList()  调用此方法会关闭 table,不建议使用
       //解决办法：由于此接口调用成功后会返回最新的列表数据,所以将此列表直接赋值即可

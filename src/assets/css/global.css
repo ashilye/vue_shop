@@ -16,3 +16,7 @@ html, body, #app {
     /* 修改样式  !important 增加权重 */
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
 }
+
+.el-cascader-menu {
+    height: 300px;
+  }
