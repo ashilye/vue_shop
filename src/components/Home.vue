@@ -70,9 +70,23 @@ export default {
     this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
-    logout() {
+    async logout() {
+      //先弹框提示
+      const confirmResult = await this.$confirm(
+        '此操作将退出, 是否继续?',
+        '提示',
+        {
+          confirmButtonText: '退出',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }
+      ).catch((err) => err)
+      //根据 返回的cancel  confirm 进行判断
+      if (confirmResult !== 'confirm') {
+        this.$message.info('您已取消')
+        return
+      }
       window.sessionStorage.clear()
-
       this.$router.push('/login')
     },
 
